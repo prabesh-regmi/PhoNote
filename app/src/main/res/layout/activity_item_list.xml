@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="1dp"
+    tools:context=".ItemListActivity">
+
+    <TextView
+        android:id="@+id/nothingToShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:text="Oops! You have othing To Show!"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/dataListLinearLayout"
+        app:layout_constraintStart_toStartOf="@+id/dataListLinearLayout"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/dataListLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/snTitle"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_weight="0.5"
+            android:background="@color/cyan_100"
+            android:fontFamily="@font/adamina"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/sn"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/dateTitle"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_weight="3"
+            android:background="@color/cyan_300"
+            android:fontFamily="@font/adamina"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/date"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/nameTitle"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_weight="2"
+            android:background="@color/cyan_200"
+            android:fontFamily="@font/adamina"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/name"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/weightTitle"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@color/cyan_100"
+            android:fontFamily="@font/adamina"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/weight"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/rateTitle"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_weight="0.5"
+            android:background="@color/cyan_300"
+            android:fontFamily="@font/adamina"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/rate"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/totalTitle"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_weight="2"
+            android:background="@color/cyan_200"
+            android:fontFamily="@font/adamina"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/total"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/datalistRv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dataListLinearLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

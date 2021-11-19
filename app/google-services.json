@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "521453554154",
+    "firebase_url": "https://notebook-62dd3-default-rtdb.firebaseio.com",
+    "project_id": "notebook-62dd3",
+    "storage_bucket": "notebook-62dd3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521453554154:android:74d72b1073d28f34e74a93",
+        "android_client_info": {
+          "package_name": "com.example.notebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "521453554154-qnljjvlcjv2hvcuj81i9h81tukp40q43.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClo7WizkHNOqcoYzowz4Gg9vxLARk1IzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "521453554154-qnljjvlcjv2hvcuj81i9h81tukp40q43.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521453554154:android:c2eaa750521f0e34e74a93",
+        "android_client_info": {
+          "package_name": "com.prabesh.phonote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "521453554154-qnljjvlcjv2hvcuj81i9h81tukp40q43.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClo7WizkHNOqcoYzowz4Gg9vxLARk1IzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "521453554154-qnljjvlcjv2hvcuj81i9h81tukp40q43.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

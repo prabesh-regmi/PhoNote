@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/dataListLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/snTitle"
+            android:layout_width="25dp"
+            android:layout_height="70dp"
+            android:layout_margin="1dp"
+            android:layout_weight="0.5"
+            android:background="@color/green"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/sn"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dateTitle"
+            android:layout_width="40dp"
+            android:layout_height="70dp"
+            android:layout_margin="1dp"
+            android:layout_weight="3"
+            android:background="@color/green"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/date"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/nameTitle"
+            android:layout_width="35dp"
+            android:layout_height="70dp"
+            android:layout_margin="1dp"
+            android:layout_weight="2"
+            android:background="@color/green"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/name"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/weightTitle"
+            android:layout_width="35dp"
+            android:layout_height="70dp"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/weight"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:background="@color/green" />
+
+        <TextView
+            android:id="@+id/rateTitle"
+            android:layout_width="30dp"
+            android:layout_height="70dp"
+            android:layout_margin="1dp"
+            android:layout_weight="0.5"
+            android:background="@color/green"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/rate"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/totalTitle"
+            android:layout_width="40dp"
+            android:layout_height="70dp"
+            android:layout_margin="1dp"
+            android:layout_weight="2"
+            android:background="@color/green"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/total"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
