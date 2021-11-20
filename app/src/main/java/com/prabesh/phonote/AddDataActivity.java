@@ -14,6 +14,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.prabesh.phonote.Modal.DataModel;
 import com.prabesh.phonote.databinding.ActivityAddDataBinding;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -50,7 +52,11 @@ public class AddDataActivity extends AppCompatActivity {
                 } else if (binding.editRate.getText().toString().length() == 0) {
                     Toast.makeText(AddDataActivity.this, "Enter Rate", Toast.LENGTH_SHORT).show();
 
-                } else {
+                } else if (notValidDateFormat(binding.editRate.getText().toString())) {
+                    Toast.makeText(AddDataActivity.this, "Invalid Date Format! ", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
                     progressDialog.show();
                     DataModel data = new DataModel();
                     int weight = Integer.parseInt(binding.editWeight.getText().toString());
@@ -87,5 +93,38 @@ public class AddDataActivity extends AppCompatActivity {
         return super.onSupportNavigateUp();
 
     }
+    public static boolean notValidDateFormat(String strDate)
+    {
+        /* Check if date is 'null' */
+        if (strDate.trim().equals(""))
+        {
+            return true;
+        }
+        /* Date is not 'null' */
+        else
+        {
+            /*
+             * Set preferred date format,
+             * For example MM-dd-yyyy, MM.dd.yyyy,dd.MM.yyyy etc.*/
+            SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-mm-dd");
+            sdfrmt.setLenient(false);
+            /* Create Date object
+             * parse the string into date
+             */
+            try
+            {
+                Date javaDate = sdfrmt.parse(strDate);
+            }
+            /* Date format is invalid */
+            catch (ParseException e)
+            {
+                return true;
+            }
+            /* Return true if date format is valid */
+            return false;
+        }
+    }
+
+
 
 }

@@ -34,11 +34,13 @@
             android:id="@+id/editDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/lightgreen"
             android:ems="10"
             android:hint="2078-3-3"
             android:inputType="date"
             android:minHeight="48dp"
-            android:textColorHint="@color/cyan_100" />
+            android:textColor="@color/black"
+            android:textColorHint="@color/green" />
 
         /
 
@@ -51,24 +53,33 @@
             android:textColor="@color/darkgreen"
             android:textSize="24sp" />
 
-        <EditText
-            android:id="@+id/editName"
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:ems="10"
-            android:hint="Kauli"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/green" />
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/lightgreen"
+                android:ems="10"
+                android:hint="काउली"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/green"
+                android:textColorHint="@color/green"
+                android:textColorLink="@color/green" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/weightView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Weight"
+            android:text="Weight/No. of Items"
             android:textColor="@color/darkgreen"
             android:textSize="24sp" />
 
@@ -77,6 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:background="@color/lightgreen"
             android:ems="10"
             android:hint="80"
             android:inputType="number"
@@ -98,6 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:background="@color/lightgreen"
             android:ems="10"
             android:hint="30"
             android:inputType="number"
@@ -117,5 +130,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
 
 </LinearLayout>
