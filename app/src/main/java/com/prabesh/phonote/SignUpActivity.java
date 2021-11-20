@@ -34,7 +34,7 @@ public class SignUpActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         Objects.requireNonNull(getSupportActionBar()).hide();
-        binding.signUpHere.setOnClickListener(new View.OnClickListener() {
+        binding.logInHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);

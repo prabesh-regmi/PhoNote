@@ -52,9 +52,8 @@ public class AddDataActivity extends AppCompatActivity {
                 } else if (binding.editRate.getText().toString().length() == 0) {
                     Toast.makeText(AddDataActivity.this, "Enter Rate", Toast.LENGTH_SHORT).show();
 
-                } else if (notValidDateFormat(binding.editRate.getText().toString())) {
+                } else if (notValidDateFormat(binding.editDate.getText().toString())) {
                     Toast.makeText(AddDataActivity.this, "Invalid Date Format! ", Toast.LENGTH_SHORT).show();
-
                 }
                 else {
                     progressDialog.show();

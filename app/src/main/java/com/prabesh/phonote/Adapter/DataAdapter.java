@@ -22,7 +22,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.viewHolder>{
 
     ArrayList<DataModel> list;
     Context context;
-    int i=0;
+    int i=1;
 
     public DataAdapter(ArrayList<DataModel> list, Context context) {
         this.list = list;
@@ -40,7 +40,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.viewHolder>{
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
 
-        if ( i%2 == 0 ){
+        if ( i%2 == 1 ){
             holder.sn.setBackgroundResource(R.color.green);
             holder.date.setBackgroundResource(R.color.green);
             holder.name.setBackgroundResource(R.color.green);
