@@ -21,7 +21,6 @@ import java.util.Objects;
 
 public class AddDataActivity extends AppCompatActivity {
     ActivityAddDataBinding binding;
-    FirebaseAuth auth;
     ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +36,9 @@ public class AddDataActivity extends AppCompatActivity {
         progressDialog.setMessage("Please Wait ...");
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
+
+
+
 
         binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +94,7 @@ public class AddDataActivity extends AppCompatActivity {
         return super.onSupportNavigateUp();
 
     }
+
     public static boolean notValidDateFormat(String strDate)
     {
         /* Check if date is 'null' */
