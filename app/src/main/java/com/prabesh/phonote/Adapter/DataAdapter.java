@@ -40,7 +40,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.viewHolder>{
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
 
-        if ( i%2 == 1 ){
+        if ( i%2 == 0 ){
             holder.sn.setBackgroundResource(R.color.green);
             holder.date.setBackgroundResource(R.color.green);
             holder.name.setBackgroundResource(R.color.green);

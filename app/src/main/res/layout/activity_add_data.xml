@@ -32,17 +32,38 @@
 
 
 
-        <EditText
+        <!--<EditText
             android:id="@+id/editDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/lightgreen"
             android:ems="10"
-            android:hint="@string/date"
+            android:hint="@string/dateExample"
             android:inputType="date"
             android:minHeight="48dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/green" />
+            android:textColorHint="@color/green" /> -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/lightgreen"
+                android:ems="10"
+                android:hint="@string/dateExample"
+                android:inputType="date"
+                android:minHeight="48dp"
+                android:textColor="@color/green"
+                android:textColorHighlight="@color/green"
+                android:textColorHint="@color/green"
+                android:textColorLink="@color/green" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
         <TextView
             android:id="@+id/nameView"
             android:layout_width="wrap_content"
@@ -67,7 +88,7 @@
                 android:hint="काउली"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:textColor="@color/black"
+                android:textColor="@color/green"
                 android:textColorHighlight="@color/green"
                 android:textColorHint="@color/green"
                 android:textColorLink="@color/green" />
@@ -82,7 +103,7 @@
             android:textColor="@color/darkgreen"
             android:textSize="24sp" />
 
-        <EditText
+       <!-- <EditText
             android:id="@+id/editWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -93,7 +114,28 @@
             android:inputType="number"
             android:minHeight="48dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/green" />
+            android:textColorHint="@color/green" />-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/lightgreen"
+                android:ems="10"
+                android:hint="50"
+                android:inputType="number"
+                android:minHeight="48dp"
+                android:textColor="@color/green"
+                android:textColorHighlight="@color/green"
+                android:textColorHint="@color/green"
+                android:textColorLink="@color/green" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <TextView
             android:id="@+id/rateView"
@@ -104,7 +146,7 @@
             android:textColor="@color/darkgreen"
             android:textSize="24sp" />
 
-        <EditText
+        <!--<EditText
             android:id="@+id/editRate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -115,17 +157,41 @@
             android:inputType="number"
             android:minHeight="48dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/green" />
+            android:textColorHint="@color/green" />-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/lightgreen"
+                android:ems="10"
+                android:hint="20"
+                android:inputType="number"
+                android:minHeight="48dp"
+                android:textColor="@color/green"
+                android:textColorHighlight="@color/green"
+                android:textColorHint="@color/green"
+                android:textColorLink="@color/green" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
     </LinearLayout>
 
     <Button
         android:id="@+id/btnSubmit"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
         android:gravity="center"
         android:text="Submit"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />

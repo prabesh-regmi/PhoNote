@@ -108,7 +108,7 @@ public class AddDataActivity extends AppCompatActivity {
             /*
              * Set preferred date format,
              * For example MM-dd-yyyy, MM.dd.yyyy,dd.MM.yyyy etc.*/
-            SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-mm-dd");
+            SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy.mm.dd");
             sdfrmt.setLenient(false);
             /* Create Date object
              * parse the string into date

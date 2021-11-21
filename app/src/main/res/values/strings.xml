@@ -2,7 +2,8 @@
     <string name="app_name">PhoNote</string>
     <string name="Add">Add</string>
     <string name="view">View</string>
-    <string name="date">2078–11-20</string>
+    <string name="date">Date</string>
+    <string name="dateExample">2078.11.20</string>
     <string name="name">Name</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
