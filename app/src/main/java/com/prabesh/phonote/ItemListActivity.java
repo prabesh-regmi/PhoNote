@@ -52,35 +52,34 @@ public class ItemListActivity extends AppCompatActivity {
         binding.datalistRv.setNestedScrollingEnabled(false);
         binding.datalistRv.setAdapter(adapter);
 
-        database.getReference().child("data")
+
+        database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user")
                 .addValueEventListener(new ValueEventListener() {
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        list.clear();
-                        for (DataSnapshot snapshot1 : snapshot.getChildren()){
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for (DataSnapshot snapshot1 : snapshot.getChildren()){
 
-                            DataModel model = snapshot1.getValue(DataModel.class);
-                            assert model != null;
-                            if (model.getAddedBy().equals(FirebaseAuth.getInstance().getUid()))
-                                list.add(model);
+                    DataModel model = snapshot1.getValue(DataModel.class);
+                    assert model != null;
+                    if (model.getAddedBy().equals(FirebaseAuth.getInstance().getUid()))
+                        list.add(model);
 
-                        }
-                        if (list.isEmpty())
-                            binding.nothingToShow.setVisibility(View.VISIBLE);
-                        else
-                            binding.nothingToShow.setVisibility(View.GONE);
-                        Collections.reverse(list);
-                        adapter.notifyDataSetChanged();
-                        progressDialog.dismiss();
-                    }
+                }
+                if (list.isEmpty())
+                    binding.nothingToShow.setVisibility(View.VISIBLE);
+                else
+                    binding.nothingToShow.setVisibility(View.GONE);
+                Collections.reverse(list);
+                adapter.notifyDataSetChanged();
+                progressDialog.dismiss();
+            }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     @Override

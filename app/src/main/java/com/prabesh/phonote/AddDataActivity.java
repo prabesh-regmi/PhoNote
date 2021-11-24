@@ -48,40 +48,46 @@ public class AddDataActivity extends AppCompatActivity {
                 } else if (binding.editName.getText().toString().length() == 0) {
                     Toast.makeText(AddDataActivity.this, "Enter Name", Toast.LENGTH_SHORT).show();
 
-                }  else if (binding.editWeight.getText().toString().length() == 0) {
+                } else if (binding.editWeight.getText().toString().length() == 0) {
                     Toast.makeText(AddDataActivity.this, "Enter Weight", Toast.LENGTH_SHORT).show();
 
                 } else if (binding.editRate.getText().toString().length() == 0) {
                     Toast.makeText(AddDataActivity.this, "Enter Rate", Toast.LENGTH_SHORT).show();
 
-                } else if (notValidDateFormat(binding.editDate.getText().toString())) {
-                    Toast.makeText(AddDataActivity.this, "Invalid Date Format! ", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (notValidDateFormat(binding.editDate.getText().toString(), "yyyy-MM-dd")
+                            || notValidDateFormat(binding.editDate.getText().toString(), "yyyy/MM/dd")
+                            || notValidDateFormat(binding.editDate.getText().toString(), "yyyy.MM.dd")){
+
+                        progressDialog.show();
+                        DataModel data = new DataModel();
+                        int weight = Integer.parseInt(binding.editWeight.getText().toString());
+                        int rate = Integer.parseInt(binding.editRate.getText().toString());
+                        data.setDate(binding.editDate.getText().toString());
+                        data.setName(binding.editName.getText().toString());
+                        data.setWeight(weight);
+                        data.setRate(rate);
+                        data.setSell(true);
+                        data.setAddedTime(new Date().getTime());
+                        data.setAddedBy(FirebaseAuth.getInstance().getUid());
+
+                        database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").push().setValue(data)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(AddDataActivity.this, "Data Added!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(AddDataActivity.this, ItemListActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
+
+                    } else {
+                        Toast.makeText(AddDataActivity.this, "Invalid Date Format! ", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else {
-                    progressDialog.show();
-                    DataModel data = new DataModel();
-                    int weight = Integer.parseInt(binding.editWeight.getText().toString());
-                    int rate = Integer.parseInt(binding.editRate.getText().toString());
-                    data.setDate(binding.editDate.getText().toString());
-                    data.setName(binding.editName.getText().toString());
-                    data.setWeight(weight);
-                    data.setRate(rate);
-                    data.setSell(true);
-                    data.setAddedTime(new Date().getTime());
-                    data.setAddedBy(FirebaseAuth.getInstance().getUid());
-
-                    database.getReference().child("data").push().setValue(data).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            progressDialog.dismiss();
-                            Toast.makeText(AddDataActivity.this, "Data Added!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(AddDataActivity.this, ItemListActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    });
-
-                }}
+            }
 
         });
 
@@ -95,7 +101,7 @@ public class AddDataActivity extends AppCompatActivity {
 
     }
 
-    public static boolean notValidDateFormat(String strDate)
+    public static boolean notValidDateFormat(String strDate, String format)
     {
         /* Check if date is 'null' */
         if (strDate.trim().equals(""))
@@ -108,7 +114,7 @@ public class AddDataActivity extends AppCompatActivity {
             /*
              * Set preferred date format,
              * For example MM-dd-yyyy, MM.dd.yyyy,dd.MM.yyyy etc.*/
-            SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy.mm.dd");
+            SimpleDateFormat sdfrmt = new SimpleDateFormat(format);
             sdfrmt.setLenient(false);
             /* Create Date object
              * parse the string into date
@@ -120,10 +126,10 @@ public class AddDataActivity extends AppCompatActivity {
             /* Date format is invalid */
             catch (ParseException e)
             {
-                return true;
+                return false;
             }
             /* Return true if date format is valid */
-            return false;
+            return true;
         }
     }
 
