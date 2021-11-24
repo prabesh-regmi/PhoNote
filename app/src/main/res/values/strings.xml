@@ -22,13 +22,12 @@
     <string name="terms_conditions">By clicking SignUp you agree all the Terms and Conditions.</string>
     <string name="signUp">SIGN UP</string>
     <string name="already_user">Already have Account?</string>
-    <string name="signUpHere">SignUp Here</string>
     <string name="logInHere">Login Here</string>
     <string name="no_user">Do not have Account?</string>
     <string name="registered_emailId">Please enter your Registered Email Id below:</string>
     <string name="submit">SUBMIT</string>
     <string name="back">BACK</string>
-    <string name="createAccount">Creating Account</string>
+    <string name="signUpHere">Creating Account</string>
     <string name="logOut">Log Out</string>
     <string name="sn">S.N</string>
     <string name="weight">Weight</string>
