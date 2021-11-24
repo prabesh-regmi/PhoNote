@@ -35,5 +35,11 @@
     <string name="total">Total</string>
     <string name="creator">Prabesh</string>
     <string name="by">By</string>
+    <string name="equal">=</string>
+    <string name="kg">Kg</string>
+    <string name="rsKg">Rs./Kg</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="textView">TextView</string>
 
 </resources>

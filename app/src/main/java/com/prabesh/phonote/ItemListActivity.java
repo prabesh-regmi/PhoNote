@@ -34,6 +34,7 @@ public class ItemListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityItemListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        getSupportActionBar().setTitle("Data");
         database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(ItemListActivity.this);
@@ -78,6 +79,10 @@ public class ItemListActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Intent intent = new Intent(ItemListActivity.this,MainActivity.class);
+                startActivity(intent);
+                finish();
+
             }
         });
     }
@@ -86,5 +91,12 @@ public class ItemListActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(ItemListActivity.this,MainActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
+
     }
 }
