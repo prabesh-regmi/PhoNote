@@ -37,6 +37,20 @@ public class AddDataActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
 
+        Intent mintent = getIntent();
+        String activity = mintent.getStringExtra("activity");
+        if (activity.equals("list")){
+            String date = mintent.getStringExtra("date");
+            String name = mintent.getStringExtra("name");
+            String weight = mintent.getStringExtra("weight");
+            String rate = mintent.getStringExtra("rate");
+            binding.editDate.setText(date);
+            binding.editName.setText(name);
+            binding.editWeight.setText(weight);
+            binding.editRate.setText(rate);
+        }
+
+
 
 
 
@@ -67,21 +81,40 @@ public class AddDataActivity extends AppCompatActivity {
                         data.setName(binding.editName.getText().toString());
                         data.setWeight(weight);
                         data.setRate(rate);
-                        data.setSell(true);
-                        data.setAddedTime(new Date().getTime());
                         data.setAddedBy(FirebaseAuth.getInstance().getUid());
-
-                        database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").push().setValue(data)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    progressDialog.dismiss();
-                                    Toast.makeText(AddDataActivity.this, "Data Added!", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(AddDataActivity.this, ItemListActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            });
+                        if (!activity.equals("list")) {
+                            data.setAddedTime(new Date().getTime());
+                            data.setSell(true);
+                            String dataId = database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").push().getKey();
+                            data.setDataId(dataId);
+                            database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").child(dataId).setValue(data)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            progressDialog.dismiss();
+                                            Toast.makeText(AddDataActivity.this, "Data Added!", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(AddDataActivity.this, ItemListActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+                        } else{
+                            database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").child(mintent.getStringExtra("id")).child("modifiedTime").setValue(new Date().getTime());
+                            database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").child(mintent.getStringExtra("id")).child("date").setValue(binding.editDate.getText().toString());
+                            database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").child(mintent.getStringExtra("id")).child("name").setValue(binding.editName.getText().toString());
+                            database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").child(mintent.getStringExtra("id")).child("weight").setValue(weight);
+                            database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").child(mintent.getStringExtra("id")).child("rate").setValue(rate)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            progressDialog.dismiss();
+                                            Toast.makeText(AddDataActivity.this, "Data Modified!", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(AddDataActivity.this, ItemListActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+                        }
 
                     } else {
                         Toast.makeText(AddDataActivity.this, "Invalid Date Format! ", Toast.LENGTH_SHORT).show();

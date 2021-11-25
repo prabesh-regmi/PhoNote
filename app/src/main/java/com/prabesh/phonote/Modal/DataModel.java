@@ -8,27 +8,26 @@ public class DataModel {
     private String date, name;
     private Integer weight, rate, total;
     private String addedBy;
-    private long addedTime;
+    private long addedTime, modifiedTime;
 
-    public DataModel(String dataId, boolean sell, String date, String name, Integer weight, Integer rate, String addedBy, long addedTime) {
+    public DataModel() {
+    }
+
+    public DataModel(String dataId, boolean sell, String date, String name, Integer weight, Integer rate, Integer total, String addedBy, long addedTime, long modifiedTime) {
         this.dataId = dataId;
         this.sell = sell;
         this.date = date;
         this.name = name;
         this.weight = weight;
         this.rate = rate;
+        this.total = total;
         this.addedBy = addedBy;
         this.addedTime = addedTime;
+        this.modifiedTime = modifiedTime;
     }
 
-    public DataModel(String date, String name, Integer weight, Integer rate) {
-        this.date = date;
-        this.name = name;
-        this.weight = weight;
-        this.rate = rate;
-    }
-
-    public DataModel() {
+    public Integer getTotal() {
+        return weight*rate;
     }
 
     public String getDataId() {
@@ -79,6 +78,10 @@ public class DataModel {
         this.rate = rate;
     }
 
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
     public String getAddedBy() {
         return addedBy;
     }
@@ -95,8 +98,11 @@ public class DataModel {
         this.addedTime = addedTime;
     }
 
-    public Integer getTotal() {
-        return weight*rate;
+    public long getModifiedTime() {
+        return modifiedTime;
     }
 
+    public void setModifiedTime(long modifiedTime) {
+        this.modifiedTime = modifiedTime;
+    }
 }

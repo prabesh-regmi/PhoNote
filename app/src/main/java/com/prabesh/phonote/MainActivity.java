@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddDataActivity.class);
+                intent.putExtra("activity", "Main");
                 startActivity(intent);
             }
         });

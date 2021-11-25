@@ -46,7 +46,7 @@ public class ItemListActivity extends AppCompatActivity {
         progressDialog.show();
 
         ArrayList<DataModel> list = new ArrayList<>();
-        DataAdapter adapter = new DataAdapter(list,this);
+        DataAdapter adapter = new DataAdapter(list, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.datalistRv.setLayoutManager(linearLayoutManager);
         binding.datalistRv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -56,36 +56,47 @@ public class ItemListActivity extends AppCompatActivity {
 
         database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user")
                 .addValueEventListener(new ValueEventListener() {
-            @SuppressLint("NotifyDataSetChanged")
+                    @SuppressLint("NotifyDataSetChanged")
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        list.clear();
+                        for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+
+                            DataModel model = snapshot1.getValue(DataModel.class);
+                            assert model != null;
+                            if (model.getAddedBy().equals(FirebaseAuth.getInstance().getUid()))
+                                list.add(model);
+
+                        }
+                        if (list.isEmpty())
+                            binding.nothingToShow.setVisibility(View.VISIBLE);
+                        else
+                            binding.nothingToShow.setVisibility(View.GONE);
+                        Collections.reverse(list);
+                        adapter.notifyDataSetChanged();
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Intent intent = new Intent(ItemListActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                });
+        binding.addData.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                list.clear();
-                for (DataSnapshot snapshot1 : snapshot.getChildren()){
-
-                    DataModel model = snapshot1.getValue(DataModel.class);
-                    assert model != null;
-                    if (model.getAddedBy().equals(FirebaseAuth.getInstance().getUid()))
-                        list.add(model);
-
-                }
-                if (list.isEmpty())
-                    binding.nothingToShow.setVisibility(View.VISIBLE);
-                else
-                    binding.nothingToShow.setVisibility(View.GONE);
-                Collections.reverse(list);
-                adapter.notifyDataSetChanged();
-                progressDialog.dismiss();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Intent intent = new Intent(ItemListActivity.this,MainActivity.class);
+            public void onClick(View v) {
+                Intent intent = new Intent(ItemListActivity.this, AddDataActivity.class);
+                intent.putExtra("activity", "Main");
                 startActivity(intent);
-                finish();
-
             }
         });
+
+
     }
+
 
     @Override
     public void onBackPressed() {
