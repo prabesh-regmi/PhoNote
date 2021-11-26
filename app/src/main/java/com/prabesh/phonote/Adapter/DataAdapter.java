@@ -1,6 +1,8 @@
 package com.prabesh.phonote.Adapter;
 
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -105,10 +107,28 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.viewHolder> {
                 else
                     holder.binding.dropdown.setRotationX(0);
 
-                if (holder.binding.lowerConstraint.getVisibility() == View.VISIBLE)
-                    holder.binding.lowerConstraint.setVisibility(View.GONE);
-                else
+                if (holder.binding.lowerConstraint.getVisibility() == View.GONE) {
                     holder.binding.lowerConstraint.setVisibility(View.VISIBLE);
+                    /*holder.binding.lowerConstraint.setAlpha(0.0f);
+
+                    holder.binding.lowerConstraint.animate()
+                            .translationY(holder.binding.lowerConstraint.getHeight())
+                            .alpha(1.0f)
+                            .setListener(null);*/
+                }
+                else {
+                    holder.binding.lowerConstraint.setVisibility(View.GONE);
+                    /*holder.binding.lowerConstraint.animate()
+                            .translationY(0)
+                            .alpha(0.0f)
+                            .setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    super.onAnimationEnd(animation);
+                                    holder.binding.lowerConstraint.setVisibility(View.GONE);
+                                }
+                            });*/
+                }
             }
         });
 
