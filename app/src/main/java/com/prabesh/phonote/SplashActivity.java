@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Objects;
 
 public class SplashActivity extends AppCompatActivity {
@@ -24,7 +26,8 @@ public class SplashActivity extends AppCompatActivity {
                 catch(InterruptedException e){
                     e.printStackTrace();
                 } finally {
-                    Intent openMain = new Intent(SplashActivity.this, MainActivity.class);
+                    FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+                    Intent openMain = new Intent(SplashActivity.this, ItemListActivity.class);
                     startActivity(openMain);
                     finish();
                 }

@@ -9,7 +9,11 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -100,16 +104,58 @@ public class ItemListActivity extends AppCompatActivity {
     }
 
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflate = getMenuInflater();
+        inflate.inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.logOut:
+                auth.signOut();
+                Intent intent = new Intent(ItemListActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private static long back_pressed;
+
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ItemListActivity.this,MainActivity.class);
-        startActivity(intent);
+
+        /** If you want to take confirmation then display Alert here...**/
+        if (back_pressed + 2000 > System.currentTimeMillis()) {
+            finishAffinity();
+            finish(); /** otherwise directly exit from here...**/
+        } else
+            Toast.makeText(getBaseContext(), "Press once again to exit!", Toast.LENGTH_SHORT).show();
+
+        back_pressed = System.currentTimeMillis();
+
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return super.onSupportNavigateUp();
-
+    protected void onStart() {
+        super.onStart();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() == null) {
+            Intent intent = new Intent(ItemListActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }
