@@ -30,6 +30,7 @@ public class AddDataActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Add Data");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").keepSynced(true);
         progressDialog = new ProgressDialog(AddDataActivity.this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setTitle("Adding Data");
@@ -65,9 +66,6 @@ public class AddDataActivity extends AppCompatActivity {
                 } else if (binding.editWeight.getText().toString().length() == 0) {
                     Toast.makeText(AddDataActivity.this, "Enter Weight", Toast.LENGTH_SHORT).show();
 
-                } else if (binding.editRate.getText().toString().length() == 0) {
-                    Toast.makeText(AddDataActivity.this, "Enter Rate", Toast.LENGTH_SHORT).show();
-
                 } else {
                     if (notValidDateFormat(binding.editDate.getText().toString(), "yyyy-MM-dd")
                             || notValidDateFormat(binding.editDate.getText().toString(), "yyyy/MM/dd")
@@ -76,7 +74,10 @@ public class AddDataActivity extends AppCompatActivity {
                         progressDialog.show();
                         DataModel data = new DataModel();
                         int weight = Integer.parseInt(binding.editWeight.getText().toString());
-                        int rate = Integer.parseInt(binding.editRate.getText().toString());
+                        int rate = 0;
+                        if (binding.editRate.getText().toString().length() != 0){
+                            rate = Integer.parseInt(binding.editRate.getText().toString());
+                        }
                         data.setDate(binding.editDate.getText().toString());
                         data.setName(binding.editName.getText().toString());
                         data.setWeight(weight);
@@ -87,33 +88,23 @@ public class AddDataActivity extends AppCompatActivity {
                             data.setSell(true);
                             String dataId = database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").push().getKey();
                             data.setDataId(dataId);
-                            database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").child(dataId).setValue(data)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void unused) {
-                                            progressDialog.dismiss();
-                                            Toast.makeText(AddDataActivity.this, "Data Added!", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(AddDataActivity.this, ItemListActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                    });
+                            database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").child(dataId).setValue(data);
+                            progressDialog.dismiss();
+                            Toast.makeText(AddDataActivity.this, "Data Added!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(AddDataActivity.this, ItemListActivity.class);
+                            startActivity(intent);
+                            finish();
                         } else{
                             database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").child(mintent.getStringExtra("id")).child("modifiedTime").setValue(new Date().getTime());
                             database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").child(mintent.getStringExtra("id")).child("date").setValue(binding.editDate.getText().toString());
                             database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").child(mintent.getStringExtra("id")).child("name").setValue(binding.editName.getText().toString());
                             database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").child(mintent.getStringExtra("id")).child("weight").setValue(weight);
-                            database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").child(mintent.getStringExtra("id")).child("rate").setValue(rate)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void unused) {
-                                            progressDialog.dismiss();
-                                            Toast.makeText(AddDataActivity.this, "Data Modified!", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(AddDataActivity.this, ItemListActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                    });
+                            database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").child(mintent.getStringExtra("id")).child("rate").setValue(rate);
+                            progressDialog.dismiss();
+                            Toast.makeText(AddDataActivity.this, "Data Modified!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(AddDataActivity.this, ItemListActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
 
                     } else {

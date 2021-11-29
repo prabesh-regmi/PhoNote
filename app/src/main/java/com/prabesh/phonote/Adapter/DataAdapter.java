@@ -79,8 +79,10 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.viewHolder> {
         holder.binding.dateTitle.setText(model.getDate());
         holder.binding.nameTitle.setText(model.getName());
         holder.binding.weightTitle.setText(model.getWeight().toString());
+
         holder.binding.rateTitle.setText(model.getRate().toString());
         holder.binding.totalTitle.setText(model.getTotal().toString());
+
         if (model.isSell())
             holder.binding.buySellView.setText("Sell");
         else

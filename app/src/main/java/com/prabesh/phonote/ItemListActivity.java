@@ -85,6 +85,8 @@ public class ItemListActivity extends AppCompatActivity {
 
                     }
                 });
+
+        database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("data_added_by_user").keepSynced(true);
         binding.addData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
