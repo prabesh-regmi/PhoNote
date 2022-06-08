@@ -17,6 +17,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.prabesh.phonote.Modal.Users;
 import com.prabesh.phonote.databinding.ActivitySignUpBinding;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -61,16 +64,18 @@ public class SignUpActivity extends AppCompatActivity {
 
             } else {
                 progressDialog.show();
+                String newPass=sha256((binding.signUpPassword.getText().toString()));
                 auth.createUserWithEmailAndPassword
-                        (binding.signUpEmail.getText().toString(), binding.signUpPassword.getText().toString()).
+                        (binding.signUpEmail.getText().toString(), newPass).
                         addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressDialog.dismiss();
                                 if (task.isSuccessful()) {
 
-                                    Users user = new Users(binding.fullName.getText().toString(), binding.signUpEmail.getText().toString(), binding.signUpPassword.getText().toString());
+                                    Users user = new Users(binding.fullName.getText().toString(), binding.signUpEmail.getText().toString(), newPass);
                                     String id = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
+
                                     database.getReference().child("Users").child(id).child("User Info").setValue(user);
 
                                     Toast.makeText(SignUpActivity.this, "Your Account has been successfully created!", Toast.LENGTH_LONG).show();
@@ -102,6 +107,23 @@ public class SignUpActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+    }
+    public static String sha256(String base){
+        try{
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(base.getBytes(StandardCharsets.UTF_8));
+            StringBuffer hexString =new StringBuffer();
+            for(int i=0; i<hash.length;i++){
+                String hex=Integer.toHexString(0xff &hash[i]);
+                if (hex.length()==1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }

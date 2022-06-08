@@ -15,6 +15,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.prabesh.phonote.databinding.ActivityLoginBinding;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
@@ -59,7 +62,8 @@ public class LoginActivity extends AppCompatActivity {
                 else{
 
                     progressDialog.show();
-                    auth.signInWithEmailAndPassword(binding.loginEmail.getText().toString(), binding.loginPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    String newPass=sha256((binding.loginPassword.getText().toString()));
+                    auth.signInWithEmailAndPassword(binding.loginEmail.getText().toString(), newPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             progressDialog.dismiss();
@@ -107,5 +111,22 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+    }
+    public static String sha256(String base){
+        try{
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(base.getBytes(StandardCharsets.UTF_8));
+            StringBuffer hexString =new StringBuffer();
+            for(int i=0; i<hash.length;i++){
+                String hex=Integer.toHexString(0xff &hash[i]);
+                if (hex.length()==1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
